@@ -2,11 +2,11 @@
   <div class="container">
     <header>
       <h1>Quizzes</h1>
-      <input type="text" placeholder="Search..." />
+      <input v-model.trim="search" type="text" placeholder="Search..." />
     </header>
     <div class="options-container">
       <div v-for="quiz in quizzes" :key="quiz.id" class="card">
-        <img :src="quiz.img" alt="" />
+        <img :src="quiz.img" :alt="`${quiz.name} Questions`" />
         <div class="card-text">
           <h2>{{ quiz.name }}</h2>
           <p>{{ quiz.questions.length }} Questions</p>
@@ -18,9 +18,18 @@
 
 <script setup>
 import q from "./data/quizzes.json";
-import { ref } from "vue";
+import { ref, watch } from "vue";
 
 const quizzes = ref(q);
+const search = ref("");
+
+// Watch enables update of content displayed when searched
+watch(search, () => {
+  // Quizzes value is equal to the name value searched
+  quizzes.value = q.filter((quiz) =>
+    quiz.name.toLowerCase().includes(search.value.toLowerCase())
+  );
+});
 </script>
 
 <style scoped>
