@@ -1,16 +1,18 @@
 <template>
   <div class="card">
-    <img
-      src="https://www.vignaclarablog.it/wp-content/uploads/2019/05/math-640x425.jpg"
-      alt="ASD Questions" />
+    <img :src="quiz.img" :alt="`${quiz.name} Questions`" />
     <div class="card-text">
-      <h2>Math</h2>
-      <p>3 Questions</p>
+      <h2>{{ quiz.name }}</h2>
+      <p>{{ quiz.questions.length }} Questions</p>
     </div>
   </div>
 </template>
 
-<script></script>
+<script setup>
+import { defineProps } from "vue";
+
+const { quiz } = defineProps(["quiz"]);
+</script>
 
 <style scoped>
 .card {

@@ -1,11 +1,11 @@
 <template>
   <div class="container">
     <header>
-      <h1>Quizzes</h1>
+      <h1>Quizes</h1>
       <input v-model.trim="search" type="text" placeholder="Search..." />
     </header>
     <div class="options-container">
-      <CardComp v-for="quiz in quizzes" :key="quiz.id" />
+      <CardComp v-for="quiz in quizes" :key="quiz.id" :quiz="quiz" />
       <!-- <div v-for="quiz in quizzes" :key="quiz.id" class="card">
         <img :src="quiz.img" :alt="`${quiz.name} Questions`" />
         <div class="card-text">
@@ -23,7 +23,7 @@ import { ref, watch } from "vue";
 
 import CardComp from "./components/CardComp.vue";
 
-const quizzes = ref(q);
+const quizes = ref(q);
 const search = ref("");
 
 // Watch enables update of content displayed when searched
