@@ -5,21 +5,22 @@
       <input type="text" placeholder="Search..." />
     </header>
     <div class="options-container">
-      <div class="card">
-        <img
-          src="https://www.vignaclarablog.it/wp-content/uploads/2019/05/math-640x425.jpg"
-          alt="" />
+      <div v-for="quiz in quizzes" :key="quiz.id" class="card">
+        <img :src="quiz.img" alt="" />
         <div class="card-text">
-          <h2>Math</h2>
-          <p>15 questions</p>
+          <h2>{{ quiz.name }}</h2>
+          <p>{{ quiz.questions.length }} Questions</p>
         </div>
       </div>
     </div>
   </div>
 </template>
 
-<script>
-export default {};
+<script setup>
+import q from "./data/quizzes.json";
+import { ref } from "vue";
+
+const quizzes = ref(q);
 </script>
 
 <style scoped>
