@@ -5,7 +5,9 @@
       :questionStatus="questionStatus"
       :barPercentage="barPercentage" />
     <div>
-      <QuestionComp :question="quiz.questions[currentQuestionIndex]" />
+      <QuestionComp
+        :question="quiz.questions[currentQuestionIndex]"
+        @selectOption="onOptionSelected" />
     </div>
   </div>
 </template>
@@ -22,6 +24,14 @@ const route = useRoute();
 const quizId = parseInt(route.params.id);
 const quiz = quizes.find((q) => q.id === quizId);
 const currentQuestionIndex = ref(0);
+const numberOfCorrectAnswers = ref(0);
+
+const onOptionSelected = (isCorrect) => {
+  if (isCorrect) {
+    numberOfCorrectAnswers.value++;
+  }
+  currentQuestionIndex.value++;
+};
 
 const questionStatus = computed(
   () => `${currentQuestionIndex.value}/${quiz.questions.length}`
